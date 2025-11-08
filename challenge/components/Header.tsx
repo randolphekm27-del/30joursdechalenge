@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 interface HeaderProps {
   onCtaClick: () => void;
-  currentPage?: 'home' | 'resources';
-  onNavigate?: (page: 'home' | 'resources') => void;
+  currentPage?: 'home' | 'resources' | 'challengers';
+  onNavigate?: (page: 'home' | 'resources' | 'challengers') => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onCtaClick, currentPage = 'home', onNavigate }) => {
@@ -34,11 +34,11 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick, currentPage = 'home', onNav
           30 JOURS<span className="text-[#8A63FF]">.</span>
         </button>
 
-        <div className="flex items-center gap-6">
-          <nav className="hidden md:flex gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <nav className="hidden sm:flex gap-4 md:gap-6">
             <button
               onClick={() => onNavigate?.('home')}
-              className={`font-semibold transition-colors ${
+              className={`font-semibold transition-colors text-sm md:text-base ${
                 currentPage === 'home' ? 'text-white' : 'text-gray-400 hover:text-white'
               }`}
             >
@@ -46,17 +46,25 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick, currentPage = 'home', onNav
             </button>
             <button
               onClick={() => onNavigate?.('resources')}
-              className={`font-semibold transition-colors ${
+              className={`font-semibold transition-colors text-sm md:text-base ${
                 currentPage === 'resources' ? 'text-white' : 'text-gray-400 hover:text-white'
               }`}
             >
               Ressources
             </button>
+            <button
+              onClick={() => onNavigate?.('challengers')}
+              className={`font-semibold transition-colors text-sm md:text-base ${
+                currentPage === 'challengers' ? 'text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              Challengers
+            </button>
           </nav>
 
           <motion.button
             onClick={onCtaClick}
-            className="bg-white text-black font-bold text-sm px-6 py-2 rounded-full transition-transform duration-300"
+            className="bg-white text-black font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-full transition-transform duration-300"
             whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)' }}
             whileTap={{ scale: 0.95 }}
           >

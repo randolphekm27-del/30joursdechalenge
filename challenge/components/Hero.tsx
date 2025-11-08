@@ -28,13 +28,13 @@ const Hero: React.FC<HeroProps> = ({ onPrimaryCtaClick }) => {
         animate="visible"
       >
         <motion.h1 
-          className="font-space-grotesk text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter max-w-4xl"
+          className="font-space-grotesk text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter max-w-4xl px-2"
           variants={itemVariants}
         >
           🌋 30 jours pour prouver à toi-même de quoi tu es capable
         </motion.h1>
         <motion.p 
-          className="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl"
+          className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl px-4"
           variants={itemVariants}
         >
           Chaque année, tu te promets : “Cette fois je vais me lancer.”, “Je suis prêt.”, “Je vais arrêter de procrastiner.” Et puis la vie reprend. Tu attends “le bon moment”.
@@ -45,7 +45,7 @@ const Hero: React.FC<HeroProps> = ({ onPrimaryCtaClick }) => {
         >
           <motion.button 
             onClick={onPrimaryCtaClick}
-            className="w-full sm:w-auto bg-gradient-to-r from-[#8A63FF] to-[#6c4de0] text-white font-bold text-lg px-10 py-4 rounded-full transition-all duration-300 shadow-lg"
+            className="w-full sm:w-auto bg-gradient-to-r from-[#8A63FF] to-[#6c4de0] text-white font-bold text-base sm:text-lg px-8 sm:px-10 py-4 rounded-full transition-all duration-300 shadow-lg"
             whileHover={{ 
               scale: 1.05, 
               boxShadow: '0 0 20px #8A63FF, 0 0 40px #8A63FF'

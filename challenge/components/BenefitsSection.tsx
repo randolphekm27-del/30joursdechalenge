@@ -31,9 +31,9 @@ const BenefitsSection: React.FC = () => {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto text-left">
                     {gains.map((gain, i) => (
-                        <div key={i} className="flex items-center p-4 border border-white/10 rounded-lg">
+                        <div key={i} className="flex items-center p-3 sm:p-4 border border-white/10 rounded-lg">
                             <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                            <span className="text-gray-300">{gain}</span>
+                            <span className="text-sm sm:text-base text-gray-300">{gain}</span>
                         </div>
                     ))}
                 </div>

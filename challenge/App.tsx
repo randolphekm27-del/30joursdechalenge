@@ -10,10 +10,11 @@ import FinalCta from './components/FinalCta';
 import Footer from './components/Footer';
 import SignupModal from './components/SignupModal';
 import ResourcesSection from './components/ResourcesSection';
+import ChallengersPage from './components/ChallengersPage';
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'home' | 'resources'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'resources' | 'challengers'>('home');
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -24,7 +25,7 @@ const App: React.FC = () => {
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  const handleNavigate = (page: 'home' | 'resources') => {
+  const handleNavigate = (page: 'home' | 'resources' | 'challengers') => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -55,8 +56,10 @@ const App: React.FC = () => {
             <TransformationSection />
             <FinalCta onCtaClick={openModal} />
           </>
-        ) : (
+        ) : currentPage === 'resources' ? (
           <ResourcesSection />
+        ) : (
+          <ChallengersPage />
         )}
       </main>
 
