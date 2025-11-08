@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 
 interface HeaderProps {
   onCtaClick: () => void;
+  currentPage?: 'home' | 'resources';
+  onNavigate?: (page: 'home' | 'resources') => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
+const Header: React.FC<HeaderProps> = ({ onCtaClick, currentPage = 'home', onNavigate }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -25,17 +27,42 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <div className="font-space-grotesk text-xl font-bold">
-          30 JOURS<span className="text-[#8A63FF]">.</span>
-        </div>
-        <motion.button 
-          onClick={onCtaClick}
-          className="hidden md:block bg-white text-black font-bold text-sm px-6 py-2 rounded-full transition-transform duration-300"
-          whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)' }}
-          whileTap={{ scale: 0.95 }}
+        <button
+          onClick={() => onNavigate?.('home')}
+          className="font-space-grotesk text-xl font-bold hover:opacity-80 transition-opacity"
         >
-          S’inscrire
-        </motion.button>
+          30 JOURS<span className="text-[#8A63FF]">.</span>
+        </button>
+
+        <div className="flex items-center gap-6">
+          <nav className="hidden md:flex gap-6">
+            <button
+              onClick={() => onNavigate?.('home')}
+              className={`font-semibold transition-colors ${
+                currentPage === 'home' ? 'text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              Accueil
+            </button>
+            <button
+              onClick={() => onNavigate?.('resources')}
+              className={`font-semibold transition-colors ${
+                currentPage === 'resources' ? 'text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              Ressources
+            </button>
+          </nav>
+
+          <motion.button
+            onClick={onCtaClick}
+            className="bg-white text-black font-bold text-sm px-6 py-2 rounded-full transition-transform duration-300"
+            whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            S'inscrire
+          </motion.button>
+        </div>
       </div>
     </motion.header>
   );

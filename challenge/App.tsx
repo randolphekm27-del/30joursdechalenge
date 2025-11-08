@@ -9,9 +9,11 @@ import TransformationSection from './components/TransformationSection';
 import FinalCta from './components/FinalCta';
 import Footer from './components/Footer';
 import SignupModal from './components/SignupModal';
+import ResourcesSection from './components/ResourcesSection';
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'home' | 'resources'>('home');
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -22,6 +24,10 @@ const App: React.FC = () => {
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const handleNavigate = (page: 'home' | 'resources') => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Parallax for background glows
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -300]);
@@ -37,15 +43,21 @@ const App: React.FC = () => {
 
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#8A63FF] to-[#22E1FF] origin-left z-50" style={{ scaleX }} />
 
-      <Header onCtaClick={openModal} />
-      
+      <Header onCtaClick={openModal} currentPage={currentPage} onNavigate={handleNavigate} />
+
       <main className="overflow-x-hidden">
-        <Hero onPrimaryCtaClick={openModal} />
-        <ProblemSection />
-        <WhySection />
-        <BenefitsSection />
-        <TransformationSection />
-        <FinalCta onCtaClick={openModal} />
+        {currentPage === 'home' ? (
+          <>
+            <Hero onPrimaryCtaClick={openModal} />
+            <ProblemSection />
+            <WhySection />
+            <BenefitsSection />
+            <TransformationSection />
+            <FinalCta onCtaClick={openModal} />
+          </>
+        ) : (
+          <ResourcesSection />
+        )}
       </main>
 
       <Footer />
